@@ -1,0 +1,74 @@
+﻿@model WebPortal.ViewModels.ProductFileRequest
+
+@{
+    ViewData["Title"] = "Product File - Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">Product File</h1>
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            <a asp-action="Index" asp-route-productid="@ViewBag.ProductID">Back to List</a>
+        </h6>
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input asp-for="FileName" type="hidden" class="form-control" />
+            <input asp-for="ProductID" type="hidden" value="@ViewBag.ProductID" />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <img src="@Model.FileUrl" class="img-fluid" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewFile" class="control-label"></label>
+                        <input asp-for="NewFile" class="form-control" />
+                        <span asp-validation-for="NewFile" class="text-danger"></span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Link" class="control-label"></label>
+                        <input asp-for="Link" class="form-control" />
+                        <span asp-validation-for="Link" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="OrderNumber" class="control-label"></label>
+                        <input asp-for="OrderNumber" class="form-control" value="1" />
+                        <span asp-validation-for="OrderNumber" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Detail" class="control-label"></label>
+                <textarea asp-for="Detail" class="form-control ckeditor"></textarea>
+                <span asp-validation-for="Detail" class="text-danger"></span>
+            </div>
+            <hr />
+            <div class="form-group">
+                <button class="btn btn-primary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-save"></i>
+                    </span>
+                    <span class="text">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+

@@ -1,0 +1,324 @@
+﻿@model WebPortal.ViewModels.ProductRequest
+@{
+    var productType = (WebPortal.Data.Entities.ProductType)ViewBag.ProductType;
+    var listType = (WebPortal.ViewModels.Common.PagedResult<WebPortal.ViewModels.ProductTypeView>)ViewBag.ListType;
+
+    ViewData["Title"] = productType.Name + " - Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">@productType.Name</h1>
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            <a asp-action="Index" asp-route-typecode="@productType.Code">Back to List</a>
+        </h6>
+    </div>
+    <div class="card-body">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input asp-for="TypeCode" type="hidden" value="@productType.Code" />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="NewImage" class="control-label"></label>
+                        <input asp-for="NewImage" class="form-control" />
+                        <span asp-validation-for="NewImage" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="InCategories" class="control-label"></label>
+                        <input asp-for="InCategories" type="hidden" />
+                        <div id="tree2" style="height:300px; overflow:auto">
+                            @await Component.InvokeAsync("TreeView", listType.Items)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UrlName" class="control-label"></label>
+                        <input asp-for="UrlName" class="form-control" />
+                        <span asp-validation-for="UrlName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Status" class="control-label"></label>
+                        <select asp-for="Status"
+                                class="form-control"
+                                asp-items="Html.GetEnumSelectList<WebPortal.Data.Enums.Status>()">
+                        </select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="OrderNumber" class="control-label"></label>
+                        <input asp-for="OrderNumber" class="form-control" value="1" />
+                        <span asp-validation-for="OrderNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ReplateProduct" class="control-label">Replate @productType.Name</label>
+                        <input asp-for="ReplateProduct" class="form-control" />
+                        <span asp-validation-for="ReplateProduct" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="IsHot" /> @Html.DisplayNameFor(model => model.IsHot)
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="IsFeature" /> @Html.DisplayNameFor(model => model.IsFeature)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group @(string.IsNullOrEmpty(productType.Text1)?"d-none":"")">
+                        <label asp-for="Text1" class="control-label">@productType.Text1</label>
+                        <textarea asp-for="Text1" class="form-control"></textarea>
+                        <span asp-validation-for="Text1" class="text-danger"></span>
+                    </div>
+                    <div class="form-group @(string.IsNullOrEmpty(productType.Text3)?"d-none":"")">
+                        <label asp-for="Text3" class="control-label">@productType.Text3</label>
+                        <textarea asp-for="Text3" class="form-control"></textarea>
+                        <span asp-validation-for="Text3" class="text-danger"></span>
+                    </div>
+                    <div class="form-group @(string.IsNullOrEmpty(productType.Text5)?"d-none":"")">
+                        <label asp-for="Text5" class="control-label">@productType.Text5</label>
+                        <textarea asp-for="Text5" class="form-control"></textarea>
+                        <span asp-validation-for="Text5" class="text-danger"></span>
+                    </div>
+                    <div class="form-group @(string.IsNullOrEmpty(productType.Text7)?"d-none":"")">
+                        <label asp-for="Text7" class="control-label">@productType.Text7</label>
+                        <textarea asp-for="Text7" class="form-control"></textarea>
+                        <span asp-validation-for="Text7" class="text-danger"></span>
+                    </div>
+                    <div class="form-group @(string.IsNullOrEmpty(productType.Text9)?"d-none":"")">
+                        <label asp-for="Text9" class="control-label">@productType.Text9</label>
+                        <textarea asp-for="Text9" class="form-control"></textarea>
+                        <span asp-validation-for="Text9" class="text-danger"></span>
+                    </div>
+                    <div class="form-group @(string.IsNullOrEmpty(productType.Text11)?"d-none":"")">
+                        <label asp-for="Text11" class="control-label">@productType.Text11</label>
+                        <textarea asp-for="Text11" class="form-control"></textarea>
+                        <span asp-validation-for="Text11" class="text-danger"></span>
+                    </div>
+                    <div class="form-group @(string.IsNullOrEmpty(productType.Text13)?"d-none":"")">
+                        <label asp-for="Text13" class="control-label">@productType.Text13</label>
+                        <textarea asp-for="Text13" class="form-control"></textarea>
+                        <span asp-validation-for="Text13" class="text-danger"></span>
+                    </div>
+                    <div class="form-group @(string.IsNullOrEmpty(productType.Text15)?"d-none":"")">
+                        <label asp-for="Text15" class="control-label">@productType.Text15</label>
+                        <textarea asp-for="Text15" class="form-control"></textarea>
+                        <span asp-validation-for="Text15" class="text-danger"></span>
+                    </div>
+                    <div class="form-group @(string.IsNullOrEmpty(productType.Text17)?"d-none":"")">
+                        <label asp-for="Text17" class="control-label">@productType.Text17</label>
+                        <textarea asp-for="Text17" class="form-control"></textarea>
+                        <span asp-validation-for="Text17" class="text-danger"></span>
+                    </div>
+                    <div class="form-group @(string.IsNullOrEmpty(productType.Text19)?"d-none":"")">
+                        <label asp-for="Text19" class="control-label">@productType.Text19</label>
+                        <textarea asp-for="Text19" class="form-control"></textarea>
+                        <span asp-validation-for="Text19" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group @(string.IsNullOrEmpty(productType.Text2)?"d-none":"")">
+                        <label asp-for="Text2" class="control-label">@productType.Text2</label>
+                        <textarea asp-for="Text2" class="form-control"></textarea>
+                        <span asp-validation-for="Text2" class="text-danger"></span>
+                    </div>
+                    <div class="form-group @(string.IsNullOrEmpty(productType.Text4)?"d-none":"")">
+                        <label asp-for="Text4" class="control-label">@productType.Text4</label>
+                        <textarea asp-for="Text4" class="form-control"></textarea>
+                        <span asp-validation-for="Text4" class="text-danger"></span>
+                    </div>
+                    <div class="form-group @(string.IsNullOrEmpty(productType.Text6)?"d-none":"")">
+                        <label asp-for="Text6" class="control-label">@productType.Text6</label>
+                        <textarea asp-for="Text6" class="form-control"></textarea>
+                        <span asp-validation-for="Text6" class="text-danger"></span>
+                    </div>
+                    <div class="form-group @(string.IsNullOrEmpty(productType.Text8)?"d-none":"")">
+                        <label asp-for="Text8" class="control-label">@productType.Text8</label>
+                        <textarea asp-for="Text8" class="form-control"></textarea>
+                        <span asp-validation-for="Text8" class="text-danger"></span>
+                    </div>
+                    <div class="form-group @(string.IsNullOrEmpty(productType.Text10)?"d-none":"")">
+                        <label asp-for="Text10" class="control-label">@productType.Text10</label>
+                        <textarea asp-for="Text10" class="form-control"></textarea>
+                        <span asp-validation-for="Text10" class="text-danger"></span>
+                    </div>
+                    <div class="form-group @(string.IsNullOrEmpty(productType.Text12)?"d-none":"")">
+                        <label asp-for="Text12" class="control-label">@productType.Text12</label>
+                        <textarea asp-for="Text12" class="form-control"></textarea>
+                        <span asp-validation-for="Text12" class="text-danger"></span>
+                    </div>
+                    <div class="form-group @(string.IsNullOrEmpty(productType.Text14)?"d-none":"")">
+                        <label asp-for="Text14" class="control-label">@productType.Text14</label>
+                        <textarea asp-for="Text14" class="form-control"></textarea>
+                        <span asp-validation-for="Text14" class="text-danger"></span>
+                    </div>
+                    <div class="form-group @(string.IsNullOrEmpty(productType.Text16)?"d-none":"")">
+                        <label asp-for="Text16" class="control-label">@productType.Text16</label>
+                        <textarea asp-for="Text16" class="form-control"></textarea>
+                        <span asp-validation-for="Text16" class="text-danger"></span>
+                    </div>
+                    <div class="form-group @(string.IsNullOrEmpty(productType.Text18)?"d-none":"")">
+                        <label asp-for="Text18" class="control-label">@productType.Text18</label>
+                        <textarea asp-for="Text18" class="form-control"></textarea>
+                        <span asp-validation-for="Text18" class="text-danger"></span>
+                    </div>
+                    <div class="form-group @(string.IsNullOrEmpty(productType.Text20)?"d-none":"")">
+                        <label asp-for="Text20" class="control-label">@productType.Text20</label>
+                        <textarea asp-for="Text20" class="form-control"></textarea>
+                        <span asp-validation-for="Text20" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <hr />
+
+            <div class="form-group">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li role="presentation" class="nav-item @(string.IsNullOrEmpty(productType.Desc1)?"d-none":"")"><a class="nav-link active" data-toggle="tab" href="#Desc1">@productType.Desc1</a></li>
+                    <li role="presentation" class="nav-item @(string.IsNullOrEmpty(productType.Desc2)?"d-none":"")"><a class="nav-link" data-toggle="tab" href="#Desc2">@productType.Desc2</a></li>
+                    <li role="presentation" class="nav-item @(string.IsNullOrEmpty(productType.Desc3)?"d-none":"")"><a class="nav-link" data-toggle="tab" href="#Desc3">@productType.Desc3</a></li>
+                    <li role="presentation" class="nav-item @(string.IsNullOrEmpty(productType.Desc4)?"d-none":"")"><a class="nav-link" data-toggle="tab" href="#Desc4">@productType.Desc4</a></li>
+                    <li role="presentation" class="nav-item @(string.IsNullOrEmpty(productType.Desc5)?"d-none":"")"><a class="nav-link" data-toggle="tab" href="#Desc5">@productType.Desc5</a></li>
+                    <li role="presentation" class="nav-item @(string.IsNullOrEmpty(productType.Desc6)?"d-none":"")"><a class="nav-link" data-toggle="tab" href="#Desc6">@productType.Desc6</a></li>
+                    <li role="presentation" class="nav-item @(string.IsNullOrEmpty(productType.Desc7)?"d-none":"")"><a class="nav-link" data-toggle="tab" href="#Desc7">@productType.Desc7</a></li>
+                    <li role="presentation" class="nav-item @(string.IsNullOrEmpty(productType.Desc8)?"d-none":"")"><a class="nav-link" data-toggle="tab" href="#Desc8">@productType.Desc8</a></li>
+                    <li role="presentation" class="nav-item @(string.IsNullOrEmpty(productType.Desc9)?"d-none":"")"><a class="nav-link" data-toggle="tab" href="#Desc9">@productType.Desc9</a></li>
+                    <li role="presentation" class="nav-item @(string.IsNullOrEmpty(productType.Desc10)?"d-none":"")"><a class="nav-link" data-toggle="tab" href="#Desc10">@productType.Desc10</a></li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div role="tabpanel" id="Desc1" class="tab-pane show active">
+                        <div class="panel-body">
+                            <textarea asp-for="Desc1" class="form-control ckeditor"></textarea>
+                        </div>
+                    </div>
+                    <div role="tabpanel" id="Desc2" class="tab-pane">
+                        <div class="panel-body">
+                            <textarea asp-for="Desc2" class="form-control ckeditor"></textarea>
+                        </div>
+                    </div>
+                    <div role="tabpanel" id="Desc3" class="tab-pane">
+                        <div class="panel-body">
+                            <textarea asp-for="Desc3" class="form-control ckeditor"></textarea>
+                        </div>
+                    </div>
+                    <div role="tabpanel" id="Desc4" class="tab-pane">
+                        <div class="panel-body">
+                            <textarea asp-for="Desc4" class="form-control ckeditor"></textarea>
+                        </div>
+                    </div>
+                    <div role="tabpanel" id="Desc5" class="tab-pane">
+                        <div class="panel-body">
+                            <textarea asp-for="Desc5" class="form-control ckeditor"></textarea>
+                        </div>
+                    </div>
+                    <div role="tabpanel" id="Desc6" class="tab-pane">
+                        <div class="panel-body">
+                            <textarea asp-for="Desc6" class="form-control ckeditor"></textarea>
+                        </div>
+                    </div>
+                    <div role="tabpanel" id="Desc7" class="tab-pane">
+                        <div class="panel-body">
+                            <textarea asp-for="Desc7" class="form-control ckeditor"></textarea>
+                        </div>
+                    </div>
+                    <div role="tabpanel" id="Desc8" class="tab-pane">
+                        <div class="panel-body">
+                            <textarea asp-for="Desc8" class="form-control ckeditor"></textarea>
+                        </div>
+                    </div>
+                    <div role="tabpanel" id="Desc9" class="tab-pane">
+                        <div class="panel-body">
+                            <textarea asp-for="Desc9" class="form-control ckeditor"></textarea>
+                        </div>
+                    </div>
+                    <div role="tabpanel" id="Desc10" class="tab-pane">
+                        <div class="panel-body">
+                            <textarea asp-for="Desc10" class="form-control ckeditor"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+            <div class="form-group">
+                <button class="btn btn-primary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-save"></i>
+                    </span>
+                    <span class="text">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts{
+    <script src="/vendor/dynatree/jquery-ui.min.js"></script>
+    <script src="/vendor/dynatree/jquery.dynatree.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ui.dynatree.nodedatadefaults["icon"] = false;
+            $("#tree2").dynatree({
+                checkbox: true,
+                selectMode: 2,
+                noLink: false,
+                onSelect: function (select, node) {
+                    var selKeys, selNodes;
+                    selNodes = node.tree.getSelectedNodes();
+                    selKeys = $.map(selNodes, function (node) {
+                        return node.data.key;
+                    });
+                    return $("input[id*='InCategories']").val(selKeys.join(","));
+                },
+                onClick: function (node, event) {
+                    if (node.getEventTargetType(event) === "title") {
+                        return node.toggleSelect();
+                    }
+                },
+                onKeydown: function (node, event) {
+                    if (event.which === 32) {
+                        node.toggleSelect();
+                        return false;
+                    }
+                },
+                onActivate: function (node) {
+                    if (node.data.href) {
+                        //window.open(node.data.href, node.data.target);
+                    }
+                },
+                onPostInit: function () {
+                    $.grep($('#InCategories').val().split(','), function (n, i) {
+                        $("#tree2").dynatree("getTree").selectKey(n);
+                    });
+                },
+                generateIds: false
+            });
+            //set node selected
+
+        });
+
+    </script>
+}

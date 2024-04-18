@@ -1,0 +1,142 @@
+﻿@model WebPortal.ViewModels.Common.PagedResult<WebPortal.ViewModels.OrderView>
+
+@{
+    ViewData["Title"] = "Order - Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var searchRequest = (WebPortal.ViewModels.OrderSearchRequest)ViewBag.SearchRequest;
+}
+
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">Order</h1>
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            List
+        </h6>
+    </div>
+    <div class="card-body">
+        <form method="get">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+                        <input name="FromDate" class="form-control" type="date" placeholder="From date" asp-for="@searchRequest.FromDate" />
+                    </div>
+                    <div class="col-md-4">
+                        <input name="ToDate" class="form-control" type="date" placeholder="To date" asp-for="@searchRequest.ToDate" />
+                    </div>
+                    <div class="col-md-4">
+                        <input name="OrderID" class="form-control" type="text" placeholder="Order ID" asp-for="@searchRequest.OrderID" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+                        <select name="OrderStatus" asp-for="@searchRequest.OrderStatus"
+                                class="form-control"
+                                asp-items="Html.GetEnumSelectList<WebPortal.Data.Enums.OrderStatus>()">
+                            <option>Order status ...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <select name="PayStatus" asp-for="@searchRequest.PayStatus"
+                                class="form-control"
+                                asp-items="Html.GetEnumSelectList<WebPortal.Data.Enums.PayStatus>()">
+                            <option>Payment status ...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-primary btn-icon-split" asp-action="Index">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-search"></i>
+                            </span>
+                            <span class="text">Search</span>
+                        </button>
+                        <button class="btn btn-success btn-icon-split" asp-action="Export">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-file-csv"></i>
+                            </span>
+                            <span class="text">Export</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-sm" id="dataTable" width="100%" cellspacing="0">
+                <thead class="thead-light">
+                    <tr>
+                        <th>
+                            Order ID
+                        </th>
+                        <th>
+                            Customer Name
+                        </th>
+                        <th>
+                            Order Status
+                        </th>
+                        <th>
+                            Total Amount
+                        </th>
+                        <th>
+                            Order Date
+                        </th>
+                        <th>
+                            Date Updated
+                        </th>
+                        <th>
+                            Update By
+                        </th>
+                        <th>
+                            Sale Name
+                        </th>
+
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items)
+                    {
+                    <tr>
+                        <td>
+                            <a asp-action="Detail" asp-route-id="@item.ID">
+                                @Html.DisplayFor(modelItem => item.ID)
+                            </a>
+                            
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CustomerName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderStatus)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalAmout)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateUpdate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UpdatedBy)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SaleName)
+                        </td>
+                        <td class="text-center">
+                            <a asp-action="Detail" asp-route-id="@item.ID" class="btn btn-success btn-circle btn-sm">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @await Component.InvokeAsync("Pager", Model)
+    </div>
+</div>

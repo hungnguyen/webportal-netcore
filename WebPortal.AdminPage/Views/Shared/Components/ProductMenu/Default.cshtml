@@ -1,0 +1,8 @@
+﻿@model IEnumerable<WebPortal.Data.Entities.ProductType>
+
+@foreach (var item in Model)
+{
+    <a class="collapse-item" asp-action="Index" asp-controller="Product" asp-route-typecode="@item.Code">
+        <span>@item.Name</span>
+    </a>
+}

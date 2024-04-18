@@ -1,0 +1,114 @@
+﻿@model WebPortal.ViewModels.Common.PagedResult<WebPortal.ViewModels.CustomerView>
+
+@{
+    ViewData["Title"] = "Customer - Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var searchRequest = (WebPortal.ViewModels.CustomerSearchRequest)ViewBag.SearchRequest;
+}
+
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">Customer</h1>
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            <a asp-action="Create" class="btn btn-primary btn-icon-split btn-sm">
+                <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                </span>
+                <span class="text">Add New</span>
+            </a>
+        </h6>
+    </div>
+    <div class="card-body">
+        <form asp-action="Index" method="get">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="text" name="Keyword" class="form-control" placeholder="Keyword..." asp-for="@searchRequest.Keyword" />
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-primary btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-search"></i>
+                            </span>
+                            <span class="text">Search</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-sm" id="dataTable" width="100%" cellspacing="0">
+                <thead class="thead-light">
+                    <tr>
+                        <th>
+                            Full name
+                        </th>
+                        <th>
+                            Username
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>
+                            Phone number
+                        </th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Is online
+                        </th>
+                        <th>
+                            Last login
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items)
+                    {
+                    <tr>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ID">
+                                @Html.DisplayFor(modelItem => item.FullName)
+                            </a>
+                            
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            @(item.IsOnline!=null && item.IsOnline.Value?"Online":"Offline")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastLoginDate)
+                        </td>
+                        
+                        <td class="text-center">
+                            <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-success btn-circle btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger btn-circle btn-sm" onclick="return confirm('Confirm delete?');">
+                                <i class="fas fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @await Component.InvokeAsync("Pager", Model)
+    </div>
+</div>

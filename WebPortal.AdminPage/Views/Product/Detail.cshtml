@@ -1,0 +1,21 @@
+﻿@model WebPortal.Data.Entities.Product
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">Internal News</h1>
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            @Model.Name
+        </h6>
+    </div>
+    <div class="card-body">
+        @Html.Raw(Model.Desc1)
+    </div>
+</div>
+

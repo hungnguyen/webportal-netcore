@@ -1,0 +1,142 @@
+﻿@model WebPortal.ViewModels.WebsiteRequest
+@inject WebPortal.Services.Common.IToolService toolService
+@{
+    ViewData["Title"] = "Webiste - Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">Webiste</h1>
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            Configuration
+        </h6>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-success @(TConverter.ChangeType<bool>(ViewBag.IsOk)?"":"d-none")">
+            Website configuration update successfully.
+        </div>
+        <form asp-action="Index">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Domain" class="control-label"></label>
+                        <input asp-for="Domain" class="form-control" />
+                        <span asp-validation-for="Domain" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Folder" class="control-label"></label>
+                        <input asp-for="Folder" class="form-control" />
+                        <span asp-validation-for="Folder" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MobileFolder" class="control-label"></label>
+                        <input asp-for="MobileFolder" class="form-control" />
+                        <span asp-validation-for="MobileFolder" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DomainAlias" class="control-label"></label>
+                        <input asp-for="DomainAlias" class="form-control" />
+                        <span asp-validation-for="DomainAlias" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UploadFolder" class="control-label"></label>
+                        <input asp-for="UploadFolder" class="form-control" />
+                        <span asp-validation-for="UploadFolder" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FromEmail" class="control-label"></label>
+                        <input asp-for="FromEmail" class="form-control" />
+                        <span asp-validation-for="FromEmail" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProjectName" class="control-label"></label>
+                        <input asp-for="ProjectName" class="form-control" />
+                        <span asp-validation-for="ProjectName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProjectLink" class="control-label"></label>
+                        <input asp-for="ProjectLink" class="form-control" />
+                        <span asp-validation-for="ProjectLink" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="SMTPServer" class="control-label"></label>
+                        <input asp-for="SMTPServer" class="form-control" />
+                        <span asp-validation-for="SMTPServer" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SMTPServerPort" class="control-label"></label>
+                        <input asp-for="SMTPServerPort" class="form-control" />
+                        <span asp-validation-for="SMTPServerPort" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SMTPUserName" class="control-label"></label>
+                        <input asp-for="SMTPUserName" class="form-control" />
+                        <span asp-validation-for="SMTPUserName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SMTPUserPassword" class="control-label"></label>
+                        <input asp-for="SMTPUserPassword" class="form-control" />
+                        <span asp-validation-for="SMTPUserPassword" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Currency" class="control-label"></label>
+                        <input asp-for="Currency" class="form-control" />
+                        <span asp-validation-for="Currency" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="DeliveryFee" class="control-label"></label>
+                        <input asp-for="DeliveryFee" class="form-control" />
+                        <span asp-validation-for="DeliveryFee" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="PageDown" class="control-label"></label>
+                        <input asp-for="PageDown" class="form-control" />
+                        <span asp-validation-for="PageDown" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="SMTPSSL" /> @Html.DisplayNameFor(model => model.SMTPSSL)
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="IsDown" /> @Html.DisplayNameFor(model => model.IsDown)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <hr />
+            <div class="form-group">
+                <button class="btn btn-primary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-save"></i>
+                    </span>
+                    <span class="text">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+

@@ -1,0 +1,84 @@
+﻿@model WebPortal.ViewModels.Common.PagedResult<WebPortal.ViewModels.ProductTypeView>
+
+@{
+    ViewData["Title"] = "Category - Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">Category</h1>
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            <a asp-action="Create" class="btn btn-primary btn-icon-split btn-sm">
+                <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                </span>
+                <span class="text">Add New</span>
+            </a>            
+            <a id="btnDelete" href="#" class="btn btn-danger btn-icon-split btn-sm">
+                <span class="icon text-white-50">
+                    <i class="fas fa-trash"></i>
+                </span>
+                <span class="text">Delete</span>
+            </a>
+        </h6>
+    </div>
+    <div class="card-body">
+
+
+        <div id="tree2">
+            @await Component.InvokeAsync("TreeView", Model.Items)
+        </div>
+        <form asp-action="Delete" method="get">
+            <input id="hfIdSelected" name="hfIdSelected" type="hidden" />
+            <button type="submit" id="btnSubmit" class="btn btn-link d-none">Delete</button>
+        </form>
+    </div>
+</div>
+@section scripts{ 
+    <script src="/vendor/dynatree/jquery-ui.min.js"></script>
+    <script src="/vendor/dynatree/jquery.dynatree.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $.ui.dynatree.nodedatadefaults["icon"] = false;
+            $("#tree2").dynatree({
+              checkbox: true,
+              selectMode: 2,
+              noLink:false,
+              onSelect: function(select, node) {
+                var selKeys, selNodes;
+                selNodes = node.tree.getSelectedNodes();
+                selKeys = $.map(selNodes, function(node) {
+                  return node.data.key;
+                });
+                return $("input[id*='hfIdSelected']").val(selKeys.join(","));
+              },
+              onClick: function(node, event) {
+                if (node.getEventTargetType(event) === "title") {
+                  return node.toggleSelect();
+                }
+              },
+              onKeydown: function(node, event) {
+                if (event.which === 32) {
+                  node.toggleSelect();
+                  return false;
+                }
+              },
+              onActivate: function(node) {
+                if( node.data.href ){
+                  window.open(node.data.href, node.data.target);
+                }
+              },
+              generateIds:false
+            });
+            $("#btnDelete").click(function () {
+                if (confirm("Confirm delete?")) {
+                    $("#btnSubmit").trigger('click');
+                }
+            });
+        });
+    </script>
+}

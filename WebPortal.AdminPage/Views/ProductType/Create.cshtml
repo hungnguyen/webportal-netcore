@@ -1,0 +1,248 @@
+﻿@model WebPortal.ViewModels.ProductTypeRequest
+
+@{
+    ViewData["Title"] = "Product Type - Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Product Type</h1>
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            <a asp-action="Index">Back to List</a>
+        </h6>
+    </div>
+    <div class="card-body">
+        <form asp-action="Create">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Status" class="control-label"></label>
+                        <select asp-for="Status" class="form-control"
+                                asp-items="Html.GetEnumSelectList<WebPortal.Data.Enums.Status>()">                            
+                        </select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Code" class="control-label"></label>
+                        <input asp-for="Code" class="form-control" />
+                        <span asp-validation-for="Code" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="IsPublic" /> @Html.DisplayNameFor(model => model.IsPublic)
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Text1" class="control-label"></label>
+                        <input asp-for="Text1" class="form-control" />
+                        <span asp-validation-for="Text1" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Text2" class="control-label"></label>
+                        <input asp-for="Text2" class="form-control" />
+                        <span asp-validation-for="Text2" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Text3" class="control-label"></label>
+                        <input asp-for="Text3" class="form-control" />
+                        <span asp-validation-for="Text3" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Text4" class="control-label"></label>
+                        <input asp-for="Text4" class="form-control" />
+                        <span asp-validation-for="Text4" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Text5" class="control-label"></label>
+                        <input asp-for="Text5" class="form-control" />
+                        <span asp-validation-for="Text5" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Text6" class="control-label"></label>
+                        <input asp-for="Text6" class="form-control" />
+                        <span asp-validation-for="Text6" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Text7" class="control-label"></label>
+                        <input asp-for="Text7" class="form-control" />
+                        <span asp-validation-for="Text7" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Text8" class="control-label"></label>
+                        <input asp-for="Text8" class="form-control" />
+                        <span asp-validation-for="Text8" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Text9" class="control-label"></label>
+                        <input asp-for="Text9" class="form-control" />
+                        <span asp-validation-for="Text9" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Text10" class="control-label"></label>
+                        <input asp-for="Text10" class="form-control" />
+                        <span asp-validation-for="Text10" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Text11" class="control-label"></label>
+                        <input asp-for="Text11" class="form-control" />
+                        <span asp-validation-for="Text11" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Text12" class="control-label"></label>
+                        <input asp-for="Text12" class="form-control" />
+                        <span asp-validation-for="Text12" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Text13" class="control-label"></label>
+                        <input asp-for="Text13" class="form-control" />
+                        <span asp-validation-for="Text13" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Text14" class="control-label"></label>
+                        <input asp-for="Text14" class="form-control" />
+                        <span asp-validation-for="Text14" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Text15" class="control-label"></label>
+                        <input asp-for="Text15" class="form-control" />
+                        <span asp-validation-for="Text15" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Text16" class="control-label"></label>
+                        <input asp-for="Text16" class="form-control" />
+                        <span asp-validation-for="Text16" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Text17" class="control-label"></label>
+                        <input asp-for="Text17" class="form-control" />
+                        <span asp-validation-for="Text17" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Text18" class="control-label"></label>
+                        <input asp-for="Text18" class="form-control" />
+                        <span asp-validation-for="Text18" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Text19" class="control-label"></label>
+                        <input asp-for="Text19" class="form-control" />
+                        <span asp-validation-for="Text19" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Text20" class="control-label"></label>
+                        <input asp-for="Text20" class="form-control" />
+                        <span asp-validation-for="Text20" class="text-danger"></span>
+                    </div>
+                    <a href="#" class="btn btn-success btn-circle" id="btnAddText">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Desc1" class="control-label"></label>
+                        <input asp-for="Desc1" class="form-control" />
+                        <span asp-validation-for="Desc1" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Desc2" class="control-label"></label>
+                        <input asp-for="Desc2" class="form-control" />
+                        <span asp-validation-for="Desc2" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Desc3" class="control-label"></label>
+                        <input asp-for="Desc3" class="form-control" />
+                        <span asp-validation-for="Desc3" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Desc4" class="control-label"></label>
+                        <input asp-for="Desc4" class="form-control" />
+                        <span asp-validation-for="Desc4" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Desc5" class="control-label"></label>
+                        <input asp-for="Desc5" class="form-control" />
+                        <span asp-validation-for="Desc5" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Desc6" class="control-label"></label>
+                        <input asp-for="Desc6" class="form-control" />
+                        <span asp-validation-for="Desc6" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Desc7" class="control-label"></label>
+                        <input asp-for="Desc7" class="form-control" />
+                        <span asp-validation-for="Desc7" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Desc8" class="control-label"></label>
+                        <input asp-for="Desc8" class="form-control" />
+                        <span asp-validation-for="Desc8" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Desc9" class="control-label"></label>
+                        <input asp-for="Desc9" class="form-control" />
+                        <span asp-validation-for="Desc9" class="text-danger"></span>
+                    </div>
+                    <div class="form-group d-none">
+                        <label asp-for="Desc10" class="control-label"></label>
+                        <input asp-for="Desc10" class="form-control" />
+                        <span asp-validation-for="Desc10" class="text-danger"></span>
+                    </div>
+                    <a href="#" class="btn btn-success btn-circle" id="btnAddDesc">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                </div>
+            </div>
+            <hr />
+            <div class="form-group">
+                <button class="btn btn-primary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-save"></i>
+                    </span>
+                    <span class="text">Save</span>
+                </button>                
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts{ 
+<script type="text/javascript">
+    $(function () {
+        var totalText = 1;
+        $("#btnAddText").click(function (e) {
+            e.preventDefault();
+            if (totalText < 20) {
+                totalText += 1;
+                $("#Text" + totalText).parent().removeClass("d-none");
+            }
+            
+        })
+        var totalDesc = 1;
+        $("#btnAddDesc").click(function (e) {
+            e.preventDefault();
+            if (totalDesc < 10) {
+                totalDesc += 1;
+                $("#Desc" + totalDesc).parent().removeClass("d-none");
+            }
+
+        })
+    })
+</script>
+}

@@ -1,0 +1,50 @@
+﻿@model WebPortal.Data.Entities.MailBox
+
+@{
+    ViewData["Title"] = "MailBox - Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">MailBox</h1>
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            <a asp-action="Index" asp-route-productid="@ViewBag.ProductID">Back to List</a>
+        </h6>
+    </div>
+    <div class="card-body">
+
+        <div class="form-group row">
+            <div class="col-md-3">
+                From:
+            </div>
+            <div class="col-md-9">
+                @Model.FromEmail
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-3">
+                To:
+            </div>
+            <div class="col-md-9">
+                @Model.ToEmail
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-3">
+                Subject:
+            </div>
+            <div class="col-md-9">
+                @Model.Subject
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            @Html.Raw(Model.Body)
+        </div>
+
+
+    </div>
+</div>

@@ -1,0 +1,188 @@
+﻿@model WebPortal.ViewModels.CategoryRequest
+@using WebPortal.Data.Entities
+@{
+    ViewData["Title"] = "Category - Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var ListCat = (List<Category>)ViewBag.ListCat;
+    var ListType = (List<ProductType>)ViewBag.ListType;
+}
+
+<!-- Page Heading -->
+<h1 class="h3 mb-2 text-gray-800">Category</h1>
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">
+            <a asp-action="Index">Back to List</a>
+        </h6>
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input asp-for="Image" type="hidden" class="form-control" />
+            <input asp-for="Icon" type="hidden" class="form-control" />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <img src="@Model.ImageUrl" class="img-fluid" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewImage" class="control-label"></label>
+                        <input asp-for="NewImage" class="form-control" />
+                        <span asp-validation-for="NewImage" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <img src="@Model.IconUrl" class="img-fluid" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NewIcon" class="control-label"></label>
+                        <input asp-for="NewIcon" class="form-control" />
+                        <span asp-validation-for="NewIcon" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UrlName" class="control-label"></label>
+                        <input asp-for="UrlName" class="form-control" />
+                        <span asp-validation-for="UrlName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DisplayType" class="control-label"></label>
+                        <input asp-for="DisplayType" class="form-control" />
+                        <span asp-validation-for="DisplayType" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Link" class="control-label"></label>
+                        <input asp-for="Link" class="form-control" />
+                        <span asp-validation-for="Link" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="IsOnTop" /> @Html.DisplayNameFor(model => model.IsOnTop)
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="IsOnRight" /> @Html.DisplayNameFor(model => model.IsOnRight)
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="IsOnBottom" /> @Html.DisplayNameFor(model => model.IsOnBottom)
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="IsOnLeft" /> @Html.DisplayNameFor(model => model.IsOnLeft)
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="IsOnCenter" /> @Html.DisplayNameFor(model => model.IsOnCenter)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="OrderNumber" class="control-label"></label>
+                        <input asp-for="OrderNumber" class="form-control" />
+                        <span asp-validation-for="OrderNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TypeCode" class="control-label"></label>
+                        <select asp-for="TypeCode" class="form-control"
+                                asp-items="@(new SelectList(ListType,"Code","Name"))">
+                            <option>Select type...</option>
+                        </select>
+                        <span asp-validation-for="TypeCode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ParentID" class="control-label"></label>
+                        <select asp-for="ParentID" class="form-control">
+                            <option value="0">No parent</option>
+                        </select>
+                        <span asp-validation-for="ParentID" class="text-danger"></span>
+                        <input type="hidden" id="hfParentID" asp-for="ParentID" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Status" class="control-label"></label>
+                        <select asp-for="Status"
+                                class="form-control"
+                                asp-items="Html.GetEnumSelectList<WebPortal.Data.Enums.Status>()">
+                        </select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="IsPopular" /> @Html.DisplayNameFor(model => model.IsPopular)
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="ShortDescription" class="control-label"></label>
+                        <textarea asp-for="ShortDescription" class="form-control"></textarea>
+                        <span asp-validation-for="ShortDescription" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MetaTitle" class="control-label"></label>
+                        <textarea asp-for="MetaTitle" class="form-control"></textarea>
+                        <span asp-validation-for="MetaTitle" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="MetaKey" class="control-label"></label>
+                        <textarea asp-for="MetaKey" class="form-control"></textarea>
+                        <span asp-validation-for="MetaKey" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MetaDescription" class="control-label"></label>
+                        <textarea asp-for="MetaDescription" class="form-control"></textarea>
+                        <span asp-validation-for="MetaDescription" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <textarea asp-for="Description" class="form-control ckeditor"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <hr />
+            <div class="form-group">
+                <button class="btn btn-primary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-save"></i>
+                    </span>
+                    <span class="text">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
